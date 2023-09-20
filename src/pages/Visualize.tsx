@@ -1,12 +1,12 @@
+import to from "await-to-js"
 import { getDatabase, off, onValue, ref, set } from "firebase/database"
 import { useAtom } from "jotai"
 import { useEffect, useState } from "react"
 import { FaClipboard, FaLock, FaUnlock } from "react-icons/fa"
 import { z } from "zod"
+import Comment from "../components/Comment"
 import RotiStat from "../components/RotiStat"
 import { notyf, userAtom, zodRoti } from "../utils"
-import Comment from "../components/Comment"
-import to from "await-to-js"
 
 interface Props {
 	rotiid: string
@@ -68,15 +68,13 @@ const Visualize = (props: Props) => {
 				<div className="flex flex-col gap-y-4 w-full lg:w-auto lg:ml-auto">
 					<div className="w-full rounded flex overflow-hidden shadow">
 						<p className="bg-white px-4 py-2 text-sm text-gray-500 flex-grow truncate">
-							{import.meta.env.VITE_URL}/form/{user.uid}/{props.rotiid}
+							{window.location.origin}/form/{user.uid}/{props.rotiid}
 						</p>
 						<button
 							className="px-4 bg-blue-600 text-white"
 							onClick={() => {
 								navigator.clipboard.writeText(
-									`${import.meta.env.VITE_URL}/form/${user.uid}/${
-										props.rotiid
-									}`,
+									`${window.location.origin}/form/${user.uid}/${props.rotiid}`,
 								)
 								notyf.success("Lien copié dans le presse papier")
 							}}
