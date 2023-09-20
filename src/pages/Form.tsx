@@ -1,18 +1,17 @@
+import to from "await-to-js"
+import { getDatabase, off, onValue, push, ref, set } from "firebase/database"
+import { useAtom } from "jotai"
 import { useEffect, useState } from "react"
+import { FaExclamationTriangle, FaLock } from "react-icons/fa"
 import { z } from "zod"
 import NumberRoti from "../components/NumberRoti"
 import {
 	alreadyRespondedAtom,
 	classNameDivRoti,
 	notyf,
-	userAtom,
 	zodRoti,
 	zodRotiResponse,
 } from "../utils"
-import { getDatabase, ref, onValue, off, push, set } from "firebase/database"
-import { useAtom } from "jotai"
-import { FaExclamationTriangle, FaLock } from "react-icons/fa"
-import to from "await-to-js"
 
 interface Props {
 	uid: string
@@ -36,14 +35,10 @@ const Form = (props: Props) => {
 	const [comment, setComment] = useState<string>("")
 
 	const [roti, setRoti] = useState<z.infer<typeof zodRoti> | null>(null)
-	const [user] = useAtom(userAtom)
 
 	useEffect(() => {
-		if (!user) {
-			return
-		}
 		const db = getDatabase()
-		const rotiRef = ref(db, `${user.uid}/rotis/${props.rotiid}`)
+		const rotiRef = ref(db, `${props.uid}/rotis/${props.rotiid}`)
 		onValue(rotiRef, (snapshot) => {
 			const roti = snapshot.val()
 			if (!roti) {
@@ -60,7 +55,7 @@ const Form = (props: Props) => {
 		return () => {
 			off(rotiRef)
 		}
-	}, [user, props.rotiid])
+	}, [props.rotiid, props.uid])
 
 	const [alreadyResponded, setAlreadyResponded] = useAtom(alreadyRespondedAtom)
 
