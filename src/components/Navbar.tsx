@@ -1,10 +1,9 @@
-import { LogoutIcon, PlusIcon } from "@heroicons/react/solid"
-import { Button } from "@tremor/react"
 import to from "await-to-js"
 import { getAuth, signOut } from "firebase/auth"
 import { useCallback } from "react"
 import { notyf } from "../utils"
 import { useLocation } from "wouter"
+import { FaPlus, FaSignOutAlt } from "react-icons/fa"
 
 const Navbar = () => {
 	const [, setLocation] = useLocation()
@@ -19,25 +18,32 @@ const Navbar = () => {
 		notyf.success("Vous avez été déconnecté")
 	}, [])
 	return (
-		<div className="shadow">
-			<div className="flex items-center px-4 py-2 container mx-auto">
-				<a href="#" className="text-lg font-bold">
+		<div className="border-b shadow">
+			<div className="flex items-center px-4 py-4 container mx-auto">
+				<button
+					className="text-lg font-bold"
+					onClick={() => {
+						setLocation("/dashboard")
+					}}
+				>
 					Roti
-				</a>
-				<div className="ml-auto flex gap-x-4">
-					<Button
-						icon={PlusIcon}
-						tooltip="Ajouter un roti"
+				</button>
+				<div className="ml-auto flex gap-x-2">
+					<button
 						onClick={() => {
 							setLocation("/create")
 						}}
-					/>
-					<Button
-						icon={LogoutIcon}
+						className="bg-blue-600 text-white px-4 py-2 rounded-md"
+					>
+						<FaPlus />
+					</button>
+					<button
 						color="red"
-						tooltip="Se déconnecter"
 						onClick={onClickSignOut}
-					/>
+						className="bg-blue-600 text-white px-4 py-2 rounded-md"
+					>
+						<FaSignOutAlt />
+					</button>
 				</div>
 			</div>
 		</div>

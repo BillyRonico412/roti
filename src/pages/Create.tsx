@@ -1,11 +1,67 @@
-import { BookmarkIcon, PlusIcon } from "@heroicons/react/solid"
-import { Button, TextInput } from "@tremor/react"
+import { useCallback, useState } from "react"
+import { FaPlus } from "react-icons/fa"
+import { notyf, userAtom, zodRoti } from "../utils"
+import { getDatabase, push, ref, set } from "firebase/database"
+import { useAtom } from "jotai"
+import { nanoid } from "nanoid"
+import { z } from "zod"
+import to from "await-to-js"
+import { useLocation } from "wouter"
 
 const Create = () => {
+	const [label, setLabel] = useState("")
+	const [, setLocation] = useLocation()
+	const [user] = useAtom(userAtom)
+	const onClickCreate = useCallback(async () => {
+		if (!user) {
+			notyf.error("Vous devez être connecté pour créer un roti")
+			return
+		}
+		if (label === "") {
+			notyf.error("Le label ne peut pas être vide")
+			return
+		}
+		const rotiId = nanoid()
+		const roti: z.infer<typeof zodRoti> = {
+			label,
+			date: Date.now(),
+			open: true,
+		}
+		const db = getDatabase()
+		const rotiRef = ref(db, `${user.uid}/rotis/`)
+		const newRotiRef = push(rotiRef)
+		const [errSet] = await to(set(newRotiRef, roti))
+		if (errSet) {
+			notyf.error("Une erreur est survenue lors de la création du roti")
+			console.error(errSet)
+			return
+		}
+		notyf.success("Le roti a été créé")
+		setLabel("")
+		setLocation(`/visualize/${rotiId}`)
+	}, [label, user, setLocation])
 	return (
-		<div className="container mx-auto h-full flex gap-x-4 justify-center items-center">
-			<TextInput placeholder="Label du roti" icon={BookmarkIcon} />
-			<Button icon={PlusIcon}>Créer</Button>
+		<div className="flex container mx-auto h-full px-4">
+			<div className="my-auto flex gap-x-4 w-full">
+				<input
+					placeholder="Label du roti"
+					className="px-4 py-2 rounded-md flex-grow"
+					value={label}
+					onInput={(e) => {
+						if (e.currentTarget.value.length > 50) {
+							notyf.error("Le label ne peut pas dépasser 50 caractères")
+							return
+						}
+						setLabel(e.currentTarget.value)
+					}}
+				/>
+				<button
+					className="bg-green-500 px-4 py-2 rounded-md text-white"
+					onClick={onClickCreate}
+				>
+					<FaPlus />
+				</button>
+			</div>
 		</div>
 	)
 }
