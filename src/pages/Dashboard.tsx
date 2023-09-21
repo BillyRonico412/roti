@@ -39,9 +39,17 @@ const Dashboard = () => {
 	}, [user])
 
 	const classTh = "py-3 px-6 font-bold text-lg text-sm text-gray-500"
+	const [search, setSearch] = useState("")
 	return (
 		<div className="container h-full mx-auto px-4 py-8">
-			<table className="w-full border shadow rounded border-collapse bg-white overflow-hidden hidden lg:table">
+			<input
+				type="text"
+				placeholder="Rechercher..."
+				className="w-full px-4 py-2 rounded bg-white"
+				value={search}
+				onInput={(e) => setSearch(e.currentTarget.value)}
+			/>
+			<table className="w-full border shadow rounded border-collapse bg-white overflow-hidden hidden lg:table mt-4">
 				<thead>
 					<tr className="bg-gray-50">
 						<th className={classTh}>Label</th>
@@ -54,12 +62,16 @@ const Dashboard = () => {
 				</thead>
 				<tbody>
 					{rotis &&
-						Object.entries(rotis).map(([rotiId, roti]) => (
-							<Roti key={rotiId} roti={roti} rotiId={rotiId} />
-						))}
+						Object.entries(rotis)
+							.filter(([, roti]) =>
+								roti.label.toLowerCase().includes(search.toLowerCase()),
+							)
+							.map(([rotiId, roti]) => (
+								<Roti key={rotiId} roti={roti} rotiId={rotiId} />
+							))}
 				</tbody>
 			</table>
-			<div className="lg:hidden">
+			<div className="lg:hidden flex flex-col gap-y-4">
 				{rotis &&
 					Object.entries(rotis).map(([rotiId, roti]) => (
 						<RotiMobile key={rotiId} roti={roti} rotiId={rotiId} />

@@ -23,7 +23,7 @@ const Form = (props: Props) => {
 		z.infer<typeof zodRotiResponse>["score"] | null
 	>(null)
 	const className = (score: z.infer<typeof zodRotiResponse>["score"]) =>
-		`px-4 p-2 rounded shadow font-medium flex items-center gap-x-4 cursor-pointer ${
+		`px-4 p-2 rounded shadow font-medium flex items-center gap-x-4 cursor-pointer border ${
 			score !== scoreCurrent
 				? "bg-white hover:bg-gray-50"
 				: classNameDivRoti(score)
@@ -34,7 +34,9 @@ const Form = (props: Props) => {
 
 	const [comment, setComment] = useState<string>("")
 
-	const [roti, setRoti] = useState<z.infer<typeof zodRoti> | null>(null)
+	const [roti, setRoti] = useState<z.infer<typeof zodRoti> | null | undefined>(
+		undefined,
+	)
 
 	useEffect(() => {
 		const db = getDatabase()
@@ -59,7 +61,7 @@ const Form = (props: Props) => {
 
 	const [alreadyResponded, setAlreadyResponded] = useAtom(alreadyRespondedAtom)
 
-	const onClickValier = async () => {
+	const onClickValider = async () => {
 		if (scoreCurrent === null) {
 			notyf.error("Veuillez sélectionner une note")
 			return
@@ -84,7 +86,11 @@ const Form = (props: Props) => {
 		setAlreadyResponded(true)
 	}
 
-	if (!roti) {
+	if (roti === undefined) {
+		return <></>
+	}
+
+	if (roti === null) {
 		return (
 			<div className="flex w-full h-full">
 				<div className="mx-auto my-auto bg-red-100 border border-red-400 text-lg font-medium px-8 py-4 rounded text-red-600 shadow shadow-red-300 flex items-center gap-x-4">
@@ -117,8 +123,8 @@ const Form = (props: Props) => {
 	}
 
 	return (
-		<div className="container mx-auto px-4 py-8">
-			<div className="flex flex-col gap-y-4">
+		<div className="flex flex-col w-full h-full container mx-auto px-4 py-8">
+			<div className="flex flex-col gap-y-4 mt-auto">
 				<div className={`${className(1)}`} onClick={() => onClickScore(1)}>
 					<NumberRoti score={1} />
 					Inutile. Je n'ai rien gagné, rien appris
@@ -154,8 +160,8 @@ const Form = (props: Props) => {
 				}}
 			/>
 			<button
-				className="bg-blue-600 rounded px-4 py-2 mt-8 text-white font-bold"
-				onClick={onClickValier}
+				className="bg-blue-600 rounded px-4 py-2 mt-8 text-white font-bold mb-auto"
+				onClick={onClickValider}
 			>
 				Envoyer
 			</button>

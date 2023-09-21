@@ -1,12 +1,11 @@
-import { useCallback, useState } from "react"
-import { FaPlus } from "react-icons/fa"
-import { notyf, userAtom, zodRoti } from "../utils"
+import to from "await-to-js"
 import { getDatabase, push, ref, set } from "firebase/database"
 import { useAtom } from "jotai"
-import { nanoid } from "nanoid"
-import { z } from "zod"
-import to from "await-to-js"
+import { useCallback, useState } from "react"
+import { FaPlus } from "react-icons/fa"
 import { useLocation } from "wouter"
+import { z } from "zod"
+import { notyf, userAtom, zodRoti } from "../utils"
 
 const Create = () => {
 	const [label, setLabel] = useState("")
@@ -21,7 +20,6 @@ const Create = () => {
 			notyf.error("Le label ne peut pas être vide")
 			return
 		}
-		const rotiId = nanoid()
 		const roti: z.infer<typeof zodRoti> = {
 			label,
 			date: Date.now(),
@@ -38,7 +36,7 @@ const Create = () => {
 		}
 		notyf.success("Le roti a été créé")
 		setLabel("")
-		setLocation(`/visualize/${rotiId}`)
+		setLocation(`/visualize/${newRotiRef.key}`)
 	}, [label, user, setLocation])
 	return (
 		<div className="flex container mx-auto h-full px-4">

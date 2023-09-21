@@ -13,7 +13,8 @@
 			},
 			"nursery": {
 				"all": true,
-				"useImportRestrictions": "off"
+				"useImportRestrictions": "off",
+				"noExcessiveComplexity": "off"
 			},
 			"a11y": {
 				"all": true,
