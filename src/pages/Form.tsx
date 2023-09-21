@@ -124,7 +124,8 @@ const Form = (props: Props) => {
 
 	return (
 		<div className="flex flex-col w-full h-full container mx-auto px-4 py-8">
-			<div className="flex flex-col gap-y-4 mt-auto">
+			<p className="text-lg font-bold mt-auto text-center">{roti.label}</p>
+			<div className="flex flex-col gap-y-4 mt-4">
 				<div className={`${className(1)}`} onClick={() => onClickScore(1)}>
 					<NumberRoti score={1} />
 					Inutile. Je n'ai rien gagné, rien appris
