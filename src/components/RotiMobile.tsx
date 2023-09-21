@@ -31,7 +31,7 @@ const RotiMobile = (props: Props) => {
 
 	return (
 		<div
-			className="bg-white px-4 py-8 flex flex-col gap-y-2 cursor-pointer"
+			className="bg-white px-4 py-8 flex flex-col gap-y-2 cursor-pointer shadow rounded"
 			onClick={() => {
 				setLocation(`/visualize/${props.rotiId}`)
 			}}

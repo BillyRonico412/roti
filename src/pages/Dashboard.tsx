@@ -45,7 +45,7 @@ const Dashboard = () => {
 			<input
 				type="text"
 				placeholder="Rechercher..."
-				className="w-full px-4 py-2 rounded bg-white"
+				className="w-full px-4 py-2 rounded bg-white shadow"
 				value={search}
 				onInput={(e) => setSearch(e.currentTarget.value)}
 			/>
@@ -71,7 +71,7 @@ const Dashboard = () => {
 							))}
 				</tbody>
 			</table>
-			<div className="lg:hidden flex flex-col gap-y-4">
+			<div className="lg:hidden flex flex-col gap-y-4 mt-4">
 				{rotis &&
 					Object.entries(rotis).map(([rotiId, roti]) => (
 						<RotiMobile key={rotiId} roti={roti} rotiId={rotiId} />

@@ -3,6 +3,7 @@ import { getDatabase, off, onValue, ref, set } from "firebase/database"
 import { useAtom } from "jotai"
 import { useEffect, useState } from "react"
 import { FaClipboard, FaLock, FaTrashAlt, FaUnlock } from "react-icons/fa"
+import { useLocation } from "wouter"
 import { z } from "zod"
 import Comment from "../components/Comment"
 import RotiStat from "../components/RotiStat"
@@ -14,6 +15,7 @@ interface Props {
 
 const Visualize = (props: Props) => {
 	const [user] = useAtom(userAtom)
+	const [, setLocation] = useLocation()
 
 	const [roti, setRoti] = useState<z.infer<typeof zodRoti> | null | undefined>(
 		undefined,
@@ -76,6 +78,7 @@ const Visualize = (props: Props) => {
 			return
 		}
 		notyf.success("Le roti a été supprimé")
+		setLocation("/dashboard")
 	}
 
 	if (!(roti && user)) {
