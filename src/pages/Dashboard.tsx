@@ -13,6 +13,15 @@ const Dashboard = () => {
 	> | null>(null)
 
 	const [user] = useAtom(userAtom)
+	const [search, setSearch] = useState("")
+
+	const rotisComputed = rotis
+		? Object.entries(rotis)
+				.filter(([, roti]) =>
+					roti.label.toLowerCase().includes(search.toLowerCase()),
+				)
+				.sort(([, rotiA], [, rotiB]) => rotiB.date - rotiA.date)
+		: []
 
 	useEffect(() => {
 		if (!user) {
@@ -39,7 +48,6 @@ const Dashboard = () => {
 	}, [user])
 
 	const classTh = "py-3 px-6 font-bold text-lg text-sm text-gray-500"
-	const [search, setSearch] = useState("")
 	return (
 		<div className="container h-full mx-auto px-4 py-8">
 			<input
@@ -61,21 +69,15 @@ const Dashboard = () => {
 					</tr>
 				</thead>
 				<tbody>
-					{rotis &&
-						Object.entries(rotis)
-							.filter(([, roti]) =>
-								roti.label.toLowerCase().includes(search.toLowerCase()),
-							)
-							.map(([rotiId, roti]) => (
-								<Roti key={rotiId} roti={roti} rotiId={rotiId} />
-							))}
+					{rotisComputed.map(([rotiId, roti]) => (
+						<Roti key={rotiId} roti={roti} rotiId={rotiId} />
+					))}
 				</tbody>
 			</table>
 			<div className="lg:hidden flex flex-col gap-y-4 mt-4">
-				{rotis &&
-					Object.entries(rotis).map(([rotiId, roti]) => (
-						<RotiMobile key={rotiId} roti={roti} rotiId={rotiId} />
-					))}
+				{rotisComputed.map(([rotiId, roti]) => (
+					<RotiMobile key={rotiId} roti={roti} rotiId={rotiId} />
+				))}
 			</div>
 		</div>
 	)

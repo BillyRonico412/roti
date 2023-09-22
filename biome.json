@@ -21,6 +21,10 @@
 				"useValidAnchor": "off",
 				"useButtonType": "off",
 				"useKeyWithClickEvents": "off"
+			},
+			"correctness": {
+				"all": true,
+				"noUndeclaredVariables": "off"
 			}
 		}
 	},
