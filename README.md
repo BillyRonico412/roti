@@ -1,27 +1,12 @@
-# React + TypeScript + Vite
+# ROAST
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+R.O.T.I: Return On Time Invested.
 
-Currently, two official plugins are available:
+Evaluate the return on time invested, at the end of a meeting or workshop, on a scale of 1 to 5 by having each participant vote by show of hands.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- 5 fingers: **Excellent**. It was worth more than the time we spent there,
+- 4 fingers: **Good**. I gained more than the time I spent there,
+- 3 fingers: **Just Average**. I didn't waste my time, nothing more,
+- 2 fingers: **Useful** but it wasn't 100% worth the time I spent there,
+- 1 finger: **Useless**. I gained nothing, learned nothing.
+- With a comment section
