@@ -28,6 +28,14 @@ const RotiMobile = (props: Props) => {
 			) / nbResponses
 		)
 	})()
+	const nbComments = (() => {
+		if (!props.roti.responses) {
+			return 0
+		}
+		return Object.values(props.roti.responses).filter(
+			(response) => response.comment,
+		).length
+	})()
 
 	return (
 		<div
@@ -52,6 +60,11 @@ const RotiMobile = (props: Props) => {
 				<span className="font-semibold">Reponses:</span>{" "}
 				<hr className="h-1 flex-grow border-opacity-10" />
 				<span className="text-gray-500 text-sm">{nbResponses}</span>
+			</div>
+			<div className="flex items-center gap-x-4">
+				<span className="font-semibold">Commentaires:</span>{" "}
+				<hr className="h-1 flex-grow border-opacity-10" />
+				<span className="text-gray-500 text-sm">{nbComments}</span>
 			</div>
 			<div className="flex items-center gap-x-4">
 				<span className="font-semibold">Moyenne:</span>{" "}

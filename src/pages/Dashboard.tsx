@@ -63,6 +63,7 @@ const Dashboard = () => {
 						<th className={classTh}>Label</th>
 						<th className={classTh}>Date</th>
 						<th className={classTh}>Reponses</th>
+						<th className={classTh}>Commentaires</th>
 						<th className={classTh}>Moyenne</th>
 						<th className={classTh}>Status</th>
 						<th className={classTh}>Action</th>

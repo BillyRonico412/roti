@@ -28,6 +28,14 @@ const Roti = (props: Props) => {
 			) / nbResponses
 		)
 	})()
+	const nbComments = (() => {
+		if (!props.roti.responses) {
+			return 0
+		}
+		return Object.values(props.roti.responses).filter(
+			(response) => response.comment,
+		).length
+	})()
 
 	const classTd = "text-center border-t py-3 px-4"
 
@@ -38,6 +46,7 @@ const Roti = (props: Props) => {
 				{dayjs(props.roti.date).format("DD/MM/YYYY")}
 			</td>
 			<td className={`${classTd} text-gray-500 text-sm`}>{nbResponses}</td>
+			<td className={`${classTd} text-gray-500 text-sm`}>{nbComments}</td>
 			<td className={`${classTd} text-gray-500 text-sm`}>
 				{average.toFixed(2)}
 			</td>
