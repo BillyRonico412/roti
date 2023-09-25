@@ -19,3 +19,6 @@ Evaluate the return on time invested, at the end of a meeting or workshop, on a 
 - React
 - TailwindCSS
 - Wouter
+
+## Contact
+- [Website 🕸️](https://ronico-billy.fr)
