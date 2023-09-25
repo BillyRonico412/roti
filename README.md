@@ -1,6 +1,8 @@
 # R.O.T.I
 
-R.O.T.I: Return On Time Invested.
+[R.O.T.I: Return On Time Invested (Click here)](https://roti-gules.vercel.app/login).
+
+## How to use it
 
 Evaluate the return on time invested, at the end of a meeting or workshop, on a scale of 1 to 5 by having each participant vote by show of hands.
 
@@ -10,3 +12,10 @@ Evaluate the return on time invested, at the end of a meeting or workshop, on a 
 - 2 fingers: **Useful** but it wasn't 100% worth the time I spent there,
 - 1 finger: **Useless**. I gained nothing, learned nothing.
 - With a comment section
+
+## Technologies
+
+- Typescript
+- React
+- TailwindCSS
+- Wouter
